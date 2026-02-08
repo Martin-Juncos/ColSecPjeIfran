@@ -2,7 +2,7 @@ import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bun
 
 createChat({
   webhookUrl:
-    "https://colsecpjeifran.onrender.com/webhook/3f2b597e-7261-46e4-b926-149ed0223541/chat",
+    "https://colsecpjeifran.onrender.com/webhook/2b7214e1-80cf-4887-acf9-9f4d357f4248/chat",
   webhookConfig: {
     method: "POST",
     headers: {},

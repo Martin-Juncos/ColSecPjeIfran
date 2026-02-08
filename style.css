@@ -69,6 +69,7 @@ body {
     position: relative;
     z-index: 1;
     background: transparent !important; /* Let the body gradient shine through */
+    display: block !important; /* Force display */
 }
 
 /* N8N Overrides for "Futuristic AI" Look */
