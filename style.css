@@ -1,0 +1,388 @@
+:root {
+    /* Futuristic Blue & Purple Palette (Model 2.2 Ref) */
+    --color-background: #0b0f19; /* Deep space blue/black */
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #a0a4b0;
+    --color-accent: #3b82f6; /* Electric Blue */
+    --color-accent-dim: #2563eb;
+    --color-accent-purple: #8b5cf6; /* Violet accent */
+    --color-glass-card: rgba(255, 255, 255, 0.05);
+    --color-glass-card-border: rgba(255, 255, 255, 0.1);
+    
+    /* Dynamic Chat Colors (Mapped to n8n variables) */
+    --chat--color--primary: var(--color-accent);
+    --chat--color--primary-shade-50: var(--color-accent-dim);
+    --chat--color--primary--shade-100: #1d4ed8;
+    --chat--color--secondary: var(--color-accent);
+    --chat--color-secondary-shade-50: var(--color-accent-dim);
+    --chat--color-white: #ffffff;
+    --chat--color-light: var(--color-glass-card);
+    --chat--color-light-shade-50: rgba(255, 255, 255, 0.08);
+    --chat--color-light-shade-100: rgba(255, 255, 255, 0.15);
+    --chat--color-medium: #64748b;
+    --chat--color-dark: #0f172a;
+    --chat--color-disabled: #334155;
+    --chat--color-typing: #94a3b8;
+
+    /* Spacing & Radius */
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --chat--spacing: var(--spacing-md);
+    --chat--border-radius: 20px; /* Modern Soft Round */
+    
+    /* Typography */
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    
+    /* Chat Window Variables Override */
+    --chat--window--width: 100%;
+    --chat--window--height: 100%;
+    --chat--header--padding: var(--spacing-lg);
+    --chat--header--background: transparent;
+    --chat--header--color: var(--color-text-primary);
+    --chat--message--font-size: 15px; /* Slightly smaller, more elegant */
+    --chat--message-line-height: 1.6;
+    
+    /* Messages */
+    --chat--message--bot--background: rgba(30, 41, 59, 0.7); /* Deep Slate Blue Glass */
+    --chat--message--bot--color: #e2e8f0;
+    --chat--message--user--background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); /* Blue Gradient */
+    --chat--message--user--color: #ffffff;
+}
+
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    /* Deep Futuristic Gradient Background */
+    background: radial-gradient(circle at 50% 10%, #1e1b4b 0%, #000000 60%); /* Deep Indigo to Black */
+    background-attachment: fixed;
+    height: 100vh;
+    width: 100vw;
+    color: var(--color-text-primary);
+    overflow: hidden;
+}
+
+/* Chat Container - Cleaner without image */
+#n8n-chat {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    background: transparent !important; /* Let the body gradient shine through */
+}
+
+/* N8N Overrides for "Futuristic AI" Look */
+
+/* Header - Totally Transparent & Top-Left */
+.chat-header {
+    background: transparent !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    padding: 20px 24px !important;
+    text-align: left !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    position: relative !important; /* For pseudo-element positioning */
+    z-index: 10;
+}
+
+/* Robot Image - Top Right, Flipped & Larger via Pseudo-element */
+.chat-header::after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 140px; /* Even Larger size */
+    height: 140px;
+    background-image: url('preview.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: scaleX(-1); /* Flip horizontally */
+    opacity: 1;
+    z-index: 11; /* Above text if overlap, or below? User said "flipped like sample", usually behind or beside. Let's keep it prominent. */
+    pointer-events: none; /* Let clicks pass through */
+}
+
+.chat-header h1 {
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: -0.5px;
+    margin: 0 !important;
+    line-height: 1.2;
+    background: linear-gradient(to right, #fff, #a5b4fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Fallback */
+}
+
+/* Subtitle styling to match alignment */
+.chat-header-subtitle {
+    text-align: left !important;
+    color: var(--color-text-secondary) !important;
+    font-size: 14px !important;
+    margin-top: 4px !important;
+}
+
+/* Chat Area */
+.chat-layout {
+    background: transparent !important;
+}
+
+/* Avatar Implementation */
+.chat-message-row {
+    display: flex !important;
+    align-items: flex-end !important;
+    gap: 12px !important;
+    margin-bottom: 16px !important; /* Space between messages */
+}
+
+/* Bot Avatar (Robot) - Left Side */
+.chat-message-row.bot::before {
+    content: '';
+    width: 40px;
+    height: 40px;
+    /* Cute Robot SVG (Base64) */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233b82f6"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 1 0 5 15.5 2.5 2.5 0 0 0 7.5 13m9 2.5A2.5 2.5 0 1 0 19 13a2.5 2.5 0 0 0-2.5 2.5"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    background-color: rgba(30, 41, 59, 0.8); /* Dark background behind icon */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+}
+
+/* User Avatar (Human) - Right Side */
+.chat-message-row.user {
+    flex-direction: row-reverse !important; /* Move text to left, avatar to right */
+}
+
+.chat-message-row.user::before {
+    content: '';
+    width: 36px; /* Increased size slightly */
+    height: 36px;
+    /* Human Silhouette SVG (Base64) */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    background-color: #2563eb; /* Blue background matching user bubble */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.5); /* Glow */
+}
+
+/* Avatar Implementation - Linked to Message Bubbles */
+
+/* CRITICAL: Allow elements to overflow their containers so avatars can be seen */
+.chat-layout,
+.chat-message-list,
+.chat-message-row,
+.chat-message-group,
+.n8n-chat-wrapper {
+    overflow: visible !important;
+}
+
+/* Wrapper adjustment */
+.chat-message-row {
+    display: flex !important;
+    align-items: flex-end !important;
+    margin-bottom: 24px !important;
+    position: relative !important;
+}
+
+/* Bot Avatar (Robot) - Attached to Bot Bubble */
+.chat-message-bot {
+    position: relative !important;
+    margin-left: 50px !important; /* Increased margin for avatar space */
+    background: rgba(30, 30, 35, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 20px 20px 20px 4px !important; 
+    color: #e2e8f0 !important;
+    padding: 12px 20px !important;
+    max-width: 75% !important; /* Prevent full width */
+    overflow: visible !important; /* CRITICAL: Allows avatar to render outside */
+}
+
+.chat-message-bot::before {
+    content: '';
+    position: absolute;
+    left: -48px; /* Positioned left of the bubble */
+    bottom: 0;
+    width: 38px;
+    height: 38px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233b82f6"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 1 0 5 15.5 2.5 2.5 0 0 0 7.5 13m9 2.5A2.5 2.5 0 1 0 19 13a2.5 2.5 0 0 0-2.5 2.5"/></svg>');
+    background-size: 65%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    background-color: rgba(15, 23, 42, 1); /* Darker solid background */
+    border: 1px solid rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    z-index: 10;
+}
+
+/* User Avatar (Human) - Attached to User Bubble */
+.chat-message-user {
+    position: relative !important;
+    margin-right: 50px !important; /* Increased margin for avatar space */
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    border-radius: 20px 20px 4px 20px !important;
+    color: #ffffff !important;
+    padding: 12px 20px !important;
+    max-width: 75% !important;
+    overflow: visible !important; /* CRITICAL: Allows avatar to render outside */
+}
+
+.chat-message-user::after {
+    content: '';
+    position: absolute;
+    right: -48px; /* Positioned right of the bubble */
+    bottom: 0;
+    width: 38px;
+    height: 38px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>');
+    background-size: 65%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    background-color: #2563eb;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
+    z-index: 10;
+}
+
+/* Ensure text doesn't touch the curved edges */
+.chat-message-text {
+    margin: 0 !important;
+}
+
+/* Input Area - Floating Capsule "Pill" */
+.chat-input-container {
+    background: transparent !important;
+    padding: 20px !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    display: flex;
+    justify-content: center;
+}
+
+.chat-input-wrapper {
+    background: rgba(30, 41, 59, 0.8) !important; /* Dark Slate Glass */
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 9999px !important; /* Full Pill */
+    padding: 6px 16px !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 600px; /* Limit width on desktop */
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.chat-input-wrapper:focus-within {
+    border-color: var(--color-accent) !important;
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+    transform: translateY(-2px);
+}
+
+.chat-input {
+    background: transparent !important;
+    border: none !important;
+    color: #ffffff !important;
+    font-size: 16px !important;
+    padding-left: 10px !important;
+}
+
+.chat-input::placeholder {
+    color: #64748b;
+}
+
+.chat-input:focus {
+    box-shadow: none !important;
+}
+
+/* Send Button - Blue Circle */
+.chat-input-send-button {
+    background: var(--color-accent) !important;
+    color: #ffffff !important;
+    border-radius: 50% !important;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+    transition: all 0.2s ease;
+}
+
+.chat-input-send-button:hover {
+    background: var(--color-accent-dim) !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+}
+
+.chat-input-send-button svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Footer & Branding - Lighter Text */
+.chat-footer,
+.chat-footer a,
+.n8n-chat-powered-by,
+.n8n-chat-powered-by a {
+    color: rgba(255, 255, 255, 0.6) !important;
+    text-decoration: none !important;
+    font-size: 12px !important;
+    transition: color 0.2s ease;
+}
+
+.chat-footer a:hover,
+.n8n-chat-powered-by a:hover {
+    color: #ffffff !important;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 480px) {
+    .chat-input-container {
+        padding: 16px !important;
+        padding-bottom: 24px !important; /* Extra padding for bottom swip bar on phones */
+    }
+    
+    .chat-input-wrapper {
+        padding: 5px 12px !important;
+    }
+
+    body {
+        background-position: center center; /* Center robot on mobile */
+    }
+}
