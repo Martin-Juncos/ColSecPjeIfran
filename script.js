@@ -26,7 +26,8 @@ createChat({
     },
     es: {
       title: "Col. Sec. Pje. Ifran",
-      subtitle: "Asistente Virtual",
+      subtitle:
+        "Este es el asistente virtual, aquí podras realizar todas tus consultas sobre los alumnos",
       footer: `Hecho con 💖 y ☕`,
       getStarted: "Nueva Conversación",
       inputPlaceholder: "Escribe tu duda...",

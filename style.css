@@ -106,6 +106,7 @@ body {
     pointer-events: none; /* Let clicks pass through */
 }
 
+/* Title Styling */
 .chat-header h1 {
     font-weight: 700;
     font-size: 28px;
@@ -117,14 +118,41 @@ body {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent; /* Fallback */
+    padding-right: 140px !important; /* Avoid overlap with robot */
 }
 
-/* Subtitle styling to match alignment */
+/* ... existing .chat-header rules ... */
+
+/* Subtitle styling */
 .chat-header-subtitle {
     text-align: left !important;
     color: var(--color-text-secondary) !important;
     font-size: 14px !important;
-    margin-top: 4px !important;
+    margin-top: 8px !important;
+    line-height: 1.4 !important;
+    max-width: 100% !important;
+}
+
+/* Mobile Header Adjustments */
+@media (max-width: 480px) {
+    .chat-header {
+        padding-right: 90px !important; /* Less padding on mobile */
+    }
+    
+    .chat-header::after {
+        width: 80px; /* Smaller robot on mobile */
+        height: 80px;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .chat-header h1 {
+        font-size: 20px; /* Smaller title */
+    }
+    
+    .chat-header-subtitle {
+        font-size: 12px !important;
+    }
 }
 
 /* Chat Area */
@@ -179,13 +207,21 @@ body {
 
 /* Avatar Implementation - Linked to Message Bubbles */
 
-/* CRITICAL: Allow elements to overflow their containers so avatars can be seen */
-.chat-layout,
-.chat-message-list,
+/* CRITICAL FIX: Only allow overflow on specific message elements, NOT the main containers */
 .chat-message-row,
 .chat-message-group,
-.n8n-chat-wrapper {
+.chat-message-bot,
+.chat-message-user {
     overflow: visible !important;
+}
+
+/* Ensure the main list scrolls properly */
+.chat-message-list {
+    overflow-y: auto !important;
+    overflow-x: hidden !important; /* Prevent horizontal scroll */
+    padding-left: 10px !important; /* Add padding to prevent avatar clipping on left */
+    padding-right: 10px !important;
+    height: 100% !important; /* Ensure it takes available space */
 }
 
 /* Wrapper adjustment */
