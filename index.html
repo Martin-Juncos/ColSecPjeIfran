@@ -31,7 +31,41 @@
 <body>
     <div id="n8n-chat"></div>
 
+<<<<<<< HEAD
     <script type="module" src="script.js"></script>
+=======
+		createChat({
+			// CORRECCIÓN DE URL
+			webhookUrl: 'https://colsecpjeifran.onrender.com/webhook/2b7214e1-80cf-4887-acf9-9f4d357f4248/chat',
+			webhookConfig: {
+				method: 'POST',
+				headers: {}
+			},
+			target: '#n8n-chat',
+			mode: 'fullscreen',
+			chatInputKey: 'chatInput',
+			chatSessionKey: 'sessionId',
+			loadPreviousSession: true,
+			metadata: {},
+			showWelcomeScreen: false,
+			defaultLanguage: 'en',
+			initialMessages: [
+				"Soy el Profe Mercho! 👋",
+				"En que puedo ayudarte hoy?",
+			],
+			i18n: {
+				en: {
+					title: "Col. Sec. Pje. Ifran",
+					subtitle: "Este es el asistente virtual, aquí podras realizar todas tus consultas sobre los alumnos",
+					footer: `Made by Prof. Martin with a lot of 💖 and ☕`,
+					getStarted: 'New Conversation',
+					inputPlaceholder: "En que puedo ayudarte...",
+				},
+			},
+			enableStreaming: false,
+		});
+	</script>
+>>>>>>> 4413ecff24a2f4145205faa44994aa0b34fed548
 </body>
 
 </html>
