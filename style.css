@@ -360,7 +360,7 @@ body {
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
     border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-    padding: 16px 20px !important; /* More horizontal padding */
+    padding: 16px 24px 16px 16px !important; /* Extra right padding */
     padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
     overflow: visible !important;
 }
@@ -371,9 +371,10 @@ body {
     background: rgba(30, 41, 59, 0.9) !important;
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
     border-radius: 50px !important;
-    padding: 8px 8px 8px 16px !important; /* Less right padding so button fits */
+    padding: 6px 6px 6px 16px !important; /* Smaller padding around button */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
     overflow: visible !important;
+    margin-right: 8px !important; /* Extra space on right */
 }
 
 /* Input controls container - ensure it doesn't clip */
