@@ -360,7 +360,7 @@ body {
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
     border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-    padding: 16px !important;
+    padding: 16px 20px !important; /* More horizontal padding */
     padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
     overflow: visible !important;
 }
