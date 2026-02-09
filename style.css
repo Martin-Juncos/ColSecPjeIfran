@@ -362,6 +362,7 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
     padding: 16px !important;
     padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+    overflow: visible !important;
 }
 
 /* The input component wrapper */
@@ -370,8 +371,15 @@ body {
     background: rgba(30, 41, 59, 0.9) !important;
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
     border-radius: 50px !important;
-    padding: 8px 16px !important;
+    padding: 8px 8px 8px 16px !important; /* Less right padding so button fits */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    overflow: visible !important;
+}
+
+/* Input controls container - ensure it doesn't clip */
+.chat-inputs,
+.chat-inputs-controls {
+    overflow: visible !important;
 }
 
 /* The actual textarea element */
@@ -401,6 +409,8 @@ button.chat-input-send-button {
     width: 44px !important;
     height: 44px !important;
     min-width: 44px !important;
+    min-height: 44px !important;
+    flex-shrink: 0 !important; /* Prevent button from being compressed */
     box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.3) !important;
     transition: all 0.2s ease !important;
 }
