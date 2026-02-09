@@ -47,6 +47,27 @@
     --chat--message--bot--color: #e2e8f0;
     --chat--message--user--background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); /* Blue Gradient */
     --chat--message--user--color: #ffffff;
+    
+    /* ===== INPUT AREA - N8N Native Variables ===== */
+    --chat--textarea--height: 50px;
+    --chat--input--font-size: 15px;
+    --chat--input--border: 1px solid rgba(255, 255, 255, 0.15);
+    --chat--input--border-radius: 50px;
+    --chat--input--padding: 12px 20px;
+    --chat--input--background: rgba(30, 41, 59, 0.9); /* Dark glass */
+    --chat--input--text-color: #e2e8f0;
+    --chat--input--border-active: 1px solid rgba(59, 130, 246, 0.5);
+    
+    /* Send Button */
+    --chat--input--send--button--background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    --chat--input--send--button--color: #ffffff;
+    --chat--input--send--button--background-hover: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+    --chat--input--send--button--color-hover: #ffffff;
+    
+    /* Footer/Body backgrounds */
+    --chat--body--background: transparent;
+    --chat--footer--background: rgba(15, 23, 42, 0.85);
+    --chat--footer--color: rgba(255, 255, 255, 0.6);
 }
 
 body {
@@ -330,95 +351,64 @@ body {
 }
 
 /* ===== INPUT AREA - Premium Glassmorphism Capsule ===== */
-.chat-input-container {
-    background: rgba(15, 23, 42, 0.85) !important; /* Dark slate with transparency */
+/* Using high-specificity selectors to override n8n's Vue scoped styles */
+
+/* The footer/input container */
+.chat-layout .chat-footer,
+.n8n-chat .chat-layout .chat-footer {
+    background: rgba(15, 23, 42, 0.9) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
-    padding: 16px 20px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 16px !important;
     padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-    display: flex !important;
-    justify-content: center !important;
 }
 
-/* Input Wrapper - The Pill Container */
-.chat-input-wrapper {
-    background: rgba(30, 41, 59, 0.9) !important; /* Darker inner pill */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    border-radius: 50px !important; /* Smooth pill shape */
-    padding: 8px 8px 8px 20px !important; /* More padding left for text */
-    box-shadow: 
-        0 4px 20px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important; /* Subtle inner glow */
-    width: 100%;
-    max-width: 600px;
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px;
-    transition: all 0.3s ease;
+/* The input component wrapper */
+.chat-layout .chat-input,
+.n8n-chat .chat-input {
+    background: rgba(30, 41, 59, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 50px !important;
+    padding: 8px 16px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
 }
 
-.chat-input-wrapper:focus-within {
-    border-color: rgba(59, 130, 246, 0.5) !important;
-    box-shadow: 
-        0 4px 25px rgba(59, 130, 246, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
-}
-
-/* Text Input Field */
-.chat-input {
+/* The actual textarea element */
+.chat-layout .chat-inputs textarea,
+.n8n-chat .chat-inputs textarea,
+.chat-inputs textarea {
     background: transparent !important;
     border: none !important;
-    outline: none !important;
-    color: #e2e8f0 !important; /* Light gray text */
+    color: #e2e8f0 !important;
     font-size: 15px !important;
-    font-weight: 400;
-    flex: 1 !important;
-    padding: 8px 0 !important;
-    min-height: 24px;
+    border-radius: 25px !important;
 }
 
-.chat-input::placeholder {
-    color: rgba(148, 163, 184, 0.7) !important; /* Muted placeholder */
-    font-weight: 400;
+.chat-inputs textarea::placeholder {
+    color: rgba(148, 163, 184, 0.7) !important;
 }
 
-.chat-input:focus {
-    box-shadow: none !important;
-    outline: none !important;
-}
-
-/* Send Button - Glowing Blue Circle */
-.chat-input-send-button {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important; /* Blue gradient */
+/* Send button with high specificity */
+.chat-layout .chat-input-send-button,
+.n8n-chat .chat-input-send-button,
+.chat-inputs-controls .chat-input-send-button,
+button.chat-input-send-button {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
     color: #ffffff !important;
     border: none !important;
     border-radius: 50% !important;
     width: 44px !important;
     height: 44px !important;
-    min-width: 44px !important; /* Prevent shrinking */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer;
-    box-shadow: 
-        0 4px 15px rgba(59, 130, 246, 0.5),
-        0 0 20px rgba(59, 130, 246, 0.3) !important; /* Strong glow */
-    transition: all 0.2s ease;
+    min-width: 44px !important;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.3) !important;
+    transition: all 0.2s ease !important;
 }
 
 .chat-input-send-button:hover {
-    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%) !important; /* Lighter on hover */
-    transform: scale(1.08);
-    box-shadow: 
-        0 6px 25px rgba(59, 130, 246, 0.6),
-        0 0 30px rgba(59, 130, 246, 0.4) !important;
-}
-
-.chat-input-send-button:active {
-    transform: scale(0.95);
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%) !important;
+    transform: scale(1.08) !important;
+    box-shadow: 0 6px 25px rgba(59, 130, 246, 0.6), 0 0 30px rgba(59, 130, 246, 0.4) !important;
 }
 
 .chat-input-send-button svg {
